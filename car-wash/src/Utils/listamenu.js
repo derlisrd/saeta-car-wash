@@ -8,10 +8,15 @@ export const listamenu = [
 
     },
     {
-        id:1,
+        id:2,
+        title:"Ventas",
+        icon:'receipt',
+        url:'/ventas'
+    },
+    {
+        id:3,
         title:'Clientes',
         icon:'people',
         url:'/clientes'
-
     }
 ]

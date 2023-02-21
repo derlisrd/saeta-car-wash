@@ -1,4 +1,5 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, LinearProgress, TextField, Zoom } from '@mui/material'
+import swal from 'sweetalert'
+import { Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, LinearProgress, TextField, Zoom } from '@mui/material'
 import {useState} from 'react'
 import { APICALLER } from '../../Services/api'
 import { useClientes } from './ClientesProvider'
@@ -6,7 +7,11 @@ import { useClientes } from './ClientesProvider'
 const ClientesCreate = () => {
 
     const {dialogs,setDialogs,token,getLista} = useClientes()
-
+    const initialErrors = {
+        active:false,
+        message:''
+    }
+    const [errors,setErrors] = useState(initialErrors)
     const [loading,setLoading] = useState(false)
     const initialForm = { doc:'',nombre_completo:''}
     const [form,setForm] = useState(initialForm)
@@ -27,12 +32,16 @@ const ClientesCreate = () => {
 
         setLoading(true)
         let res = await APICALLER.insert({table:'clientes',data:form,token:token})
+
         if(res.response){
             cerrar()        
             getLista()
+            setErrors(initialErrors)
+            swal({icon:'success',text:'Agregado correctamente',timer:3000});
         }else{
-            console.log(res)
+            setErrors({active:true,message:res.message})
         }
+        
         setLoading(false)
     }
 
@@ -47,6 +56,10 @@ const ClientesCreate = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         {loading && <LinearProgress />}
+                    
+                        {
+                            errors.active && <Alert severity='error'> { errors.message}</Alert>
+                        }
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <TextField required disabled={loading} autoComplete='off' autoFocus fullWidth name="doc" value={form.doc} onChange={change} label="Documento" />

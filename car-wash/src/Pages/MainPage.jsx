@@ -4,6 +4,7 @@ import { useState } from "react";
 import Menu from "../Components/Menu";
 import { env } from "../App/config";
 import { useAuth } from "../Contexts/AuthContextProvider";
+import AppToolBar from "../Components/Menu/AppToolBar";
 //import Menu from "../Components/Menu";
 
 function MainPage({ children,window }) {
@@ -21,8 +22,8 @@ function MainPage({ children,window }) {
       <AppBar color="inherit" 
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          ml: { md: `${drawerWidth}px` },
         }}
       >
         <Toolbar>
@@ -31,22 +32,17 @@ function MainPage({ children,window }) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { md: 'none' } }}
           >
             <Icon>menu</Icon>
           </IconButton>
           
-          <Typography variant="h6" noWrap component="div">
-            {env.APP_NAME}
-          </Typography>
-            <Button variant="contained" onClick={logOut}>
-              log out
-            </Button>
+          <AppToolBar />
         </Toolbar>
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -59,7 +55,7 @@ function MainPage({ children,window }) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { sm: 'block', md: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
@@ -68,7 +64,7 @@ function MainPage({ children,window }) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
+            display: { sm: 'none', md: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
           open
@@ -78,7 +74,7 @@ function MainPage({ children,window }) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{ flexGrow: 1, p: 3, width: { md: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
         {children}

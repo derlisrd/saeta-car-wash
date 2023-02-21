@@ -38,7 +38,7 @@ const LoginForm = () => {
     return <Backdrop  open={true}><CircularProgress color="inherit" /></Backdrop>
   }
 
-  console.log(loading)
+  
 
   return (
     <form onSubmit={submit}>

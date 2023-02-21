@@ -7,6 +7,7 @@ import { useAuth } from "../Contexts/AuthContextProvider";
 import Clientes from "../Pages/Clientes";
 import Home from "../Pages/Home";
 import NotFound from "../Pages/404";
+import Ventas from "../Pages/Ventas";
 
 function RoutesMain() {
   
@@ -38,6 +39,7 @@ function RoutesMain() {
     <Routes>
       <Route path={R+"home"} element={<PrivateRoute><Home /></PrivateRoute>} />
       <Route path={R+"clientes"} element={<PrivateRoute><Clientes /></PrivateRoute>} />
+      <Route path={R+"ventas"} element={<PrivateRoute><Ventas /></PrivateRoute>} />
       <Route path={R} element={<LoginForm />} />
       <Route path={'*'} element={<NotFound />} />
     </Routes>
